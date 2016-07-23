@@ -9,24 +9,34 @@
 #define IR_STATION_MODE_AP    2
 
 extern remocon ir[IR_CH_SIZE];
-extern uint8_t mode;
-extern String ssid;
-extern String password;
-extern String mdns_address;
 
-void modeSetup(void);
-void setMode(uint8_t newMode);
+class IR_Station {
+  public:
+    uint8_t mode;
+    String ssid;
+    String password;
+    String mdns_hostname;
 
-void setupButtonInterrupt();
+    void modeSetup(void);
+    void setMode(uint8_t newMode);
+    void reset();
 
-void irSendSignal(int ch);
-int irRecodeSignal(int ch);
+    void setupButtonInterrupt();
 
-void irDataBackupToFile(int ch);
-void irDataRestoreFromFile(void);
+    void irSendSignal(int ch);
+    int irRecodeSignal(int ch);
 
-void settingsRestoreFromFile(void);
-void settingsBackupToFile(void);
+    String settingsCrcSerial(void);
+    bool irDataBackupToFile(int ch);
+    bool irDataRestoreFromFile(void);
+
+    bool settingsRestoreFromFile(void);
+    bool settingsBackupToFile(void);
+
+  private:
+};
+
+extern IR_Station station;
 
 bool writeStringToFile(String path, String dataString);
 bool getStringFromFile(String path, String& dataString);

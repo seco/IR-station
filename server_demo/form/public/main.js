@@ -30,7 +30,8 @@ function form(){
 				$('#ap').toggle();
 				$('#info-status').text("Connection failed. Please try again.");
 			}else{
-				$('#info-status').text("Connection Successful.");
+				$('#info-status').html('Connection Successful.<br/>Please make a note of this URL: <a href="http:\/\/' + res + '/">http://' + res + '/</a>');
+				$('button.reboot').show();
 			}
 		});
 	}
@@ -62,5 +63,8 @@ $('#ap input').keypress(function(e){
 	}
 });
 
+$('button.reboot').click(function(e){
+	$.get('/reboot');
+});
 getWifiList();
 

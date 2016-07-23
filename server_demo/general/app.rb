@@ -12,7 +12,7 @@ chName = [
 ]
 
 get '/' do
-	send_file File.join(settings.public_folder,'index.html')
+	send_file File.join(settings.public_folder,'index.htm')
 end
 
 get "/recode" do
